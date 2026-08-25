@@ -19,7 +19,7 @@ You may use any combination of web technologies covered in the course, including
 - Bootstrap
 - PHP
 
-You are **not required** to use all of these technologies. Choose the combination that best supports your solution.
+You must use PHP, HTML, CSS, JavaScript for this assignment. JQuery and Bootstrap are optional.
 
 ---
 
