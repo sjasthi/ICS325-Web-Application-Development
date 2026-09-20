@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML in 10 Points: Try It Yourself</title>
+  <style>
+    :root {
+      --paper: #f3f7fb;
+      --grid: #dde7f1;
+      --ink: #1b2a41;
+      --ink-soft: #4a5b73;
+      --blue: #2f6fed;
+      --marker: #ffe066;
+      --card: #ffffff;
+      --code-bg: #16202f;
+      --code-ink: #e8eef7;
+      --line: #c4d2e2;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    code, textarea, pre {
+      font-family: "Consolas", "Menlo", "Courier New", monospace;
+    }
+    a { color: var(--blue); }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+    header.hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 code {
+      background: var(--marker);
+      padding: 0 10px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      box-decoration-break: clone;
+    }
+    .hero p { max-width: 60ch; font-size: 1.1rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+    .howto {
+      max-width: 980px;
+      margin: 12px auto 8px;
+      padding: 0 20px;
+    }
+    .howto div {
+      background: var(--card);
+      border: 2px dashed var(--line);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .howto p { margin: 0; }
+
+    main { max-width: 980px; margin: 0 auto; padding: 8px 20px 60px; }
+
+    .lesson {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 22px 22px 24px;
+      margin: 28px 0;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .lesson-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+    .num {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--marker);
+      border: 2px solid var(--ink);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 1.2rem;
+    }
+    .lesson h2 { margin: 0; font-size: 1.45rem; line-height: 1.25; }
+    .lesson > p { margin: 8px 0 14px; max-width: 70ch; }
+    .lesson p code, .lesson li code {
+      background: #e9f0fa;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.92em;
+    }
+
+    .try { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pane { display: flex; flex-direction: column; min-width: 0; }
+    .pane-label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--ink-soft);
+    }
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      resize: vertical;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+    iframe {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+    }
+    button.reset {
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    button.reset:hover { background: var(--marker); }
+
+    .challenge {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: #fff8d6;
+      border-left: 6px solid var(--marker);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.97rem;
+    }
+
+    section.finish {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 36px;
+    }
+    section.finish h2 { margin-top: 0; }
+    section.finish code { background: #2b3d59; padding: 1px 6px; border-radius: 4px; }
+    section.finish ol { padding-left: 1.3em; }
+
+    footer { text-align: center; color: var(--ink-soft); padding: 0 20px 40px; font-size: 0.9rem; }
+
+    @media (max-width: 760px) {
+      .try { grid-template-columns: 1fr; }
+      .lesson { box-shadow: 4px 4px 0 var(--ink); padding: 18px 16px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>HTML in 10 points</h1>
+  <p>HTML is how every web page is built. Read each point, then change the code in the dark box and watch the page on the right update instantly.</p>
+</header>
+
+<div class="howto">
+  <div>
+    <p><strong>How to use this page:</strong> nothing you type here can break anything. Mess it up on purpose, then press <em>Reset</em> to get the original code back.</p>
+  </div>
+</div>
+
+<main id="lessons"></main>
+
+<div style="max-width:980px;margin:0 auto;padding:0 20px 40px;">
+  <section class="finish">
+    <h2>Make your own web page</h2>
+    <ol>
+      <li>Open a plain text editor (Notepad, TextEdit in plain-text mode, or VS Code).</li>
+      <li>Copy the code from Point 4, the page skeleton, and paste it in.</li>
+      <li>Save the file as <code>index.html</code>.</li>
+      <li>Double-click the file to open it in your browser.</li>
+      <li>Change something, save, and refresh the browser. Repeat.</li>
+    </ol>
+    <p>Breaking things and fixing them is how every web developer learns.</p>
+  </section>
+</div>
+
+<footer>You can view the source of any web page by right-clicking and choosing "View page source."</footer>
+
+<script>
+  var lessons = [
+    {
+      title: "HTML stands for HyperText Markup Language",
+      text: "HTML gives a web page its structure and content. Think of it as the skeleton of a website: headings, paragraphs, pictures, and links are all defined with HTML.",
+      code: "<h1>Hello, world!</h1>\n<p>This is my first web page.</p>",
+      challenge: "Change the text to your own name and favorite hobby."
+    },
+    {
+      title: "It is a markup language, not a programming language",
+      text: "HTML does not calculate or make decisions. It labels content, such as \"this is important\" or \"this is a paragraph,\" so the browser knows how to show it.",
+      code: "<p>This word is <strong>important</strong>.</p>\n<p>This word has <em>emphasis</em>.</p>\n<p>Water is H<sub>2</sub>O and 3<sup>2</sup> is 9.</p>",
+      challenge: "Add a sentence of your own using <strong> and <em>."
+    },
+    {
+      title: "Tags are the building blocks",
+      text: "Most elements have an opening tag and a closing tag around the content, like <code>&lt;p&gt;Hello&lt;/p&gt;</code>. The closing tag starts with a forward slash.",
+      code: "<p>I am a paragraph.</p>\n<h2>I am a heading</h2>\n<button>I am a button</button>\n<hr>\n<p>The line above is a tag with no closing tag!</p>",
+      challenge: "Delete a closing tag such as </p> and see how the browser reacts. Then put it back."
+    },
+    {
+      title: "Every page has the same basic skeleton",
+      text: "The <code>&lt;head&gt;</code> holds behind-the-scenes information, like the title on the browser tab. The <code>&lt;body&gt;</code> holds everything you actually see.",
+      code: "<!DOCTYPE html>\n<html lang=\"en\">\n<head>\n  <meta charset=\"utf-8\">\n  <title>My Page</title>\n</head>\n<body>\n  <h1>Welcome!</h1>\n  <p>Everything visible goes in the body.</p>\n</body>\n</html>",
+      challenge: "Change the <title>. (In your own file, it appears on the browser tab.) Then add a second paragraph to the body."
+    },
+    {
+      title: "Headings and paragraphs organize text",
+      text: "Use <code>&lt;h1&gt;</code> through <code>&lt;h6&gt;</code> for headings. <code>&lt;h1&gt;</code> is the most important and the biggest. Use <code>&lt;p&gt;</code> for paragraphs.",
+      code: "<h1>Main title</h1>\n<h2>Section title</h2>\n<h3>Smaller subsection</h3>\n<h4>Even smaller</h4>\n<p>A paragraph of text goes here.</p>",
+      challenge: "Add <h5> and <h6> headings. Should a page have more than one <h1>? Discuss with a classmate."
+    },
+    {
+      title: "Links connect the web",
+      text: "The anchor tag <code>&lt;a&gt;</code> makes clickable links. Its <code>href</code> attribute says where the link goes.",
+      code: "<p>Visit <a href=\"https://developer.mozilla.org\" target=\"_blank\">MDN Web Docs</a> to learn more.</p>\n<p><a href=\"https://wikipedia.org\" target=\"_blank\">Go to Wikipedia</a></p>",
+      challenge: "Add a link to your favorite website. The target=\"_blank\" part opens it in a new tab."
+    },
+    {
+      title: "Images and lists add richness",
+      text: "Show pictures with <code>&lt;img&gt;</code> and always include <code>alt</code> text describing the picture, which helps people using screen readers. Use <code>&lt;ul&gt;</code> for bullet lists and <code>&lt;ol&gt;</code> for numbered lists, with each item in <code>&lt;li&gt;</code>.",
+      code: "<img alt=\"A yellow sun\" width=\"90\" src=\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='50' fill='%23ffb703'/%3E%3C/svg%3E\">\n\n<h3>Things I like</h3>\n<ul>\n  <li>Pizza</li>\n  <li>Music</li>\n</ul>\n\n<h3>Morning routine</h3>\n<ol>\n  <li>Wake up</li>\n  <li>Eat breakfast</li>\n</ol>",
+      challenge: "Add two more items to each list. Then change the image's src to a name that does not exist, like cat.jpg, and see the alt text appear."
+    },
+    {
+      title: "Attributes customize elements",
+      text: "Attributes live inside the opening tag as <code>name=\"value\"</code> pairs. Common ones are <code>src</code>, <code>href</code>, <code>id</code>, <code>class</code>, and <code>style</code>. An <code>id</code> or <code>class</code> gives an element a name that CSS and JavaScript can target.",
+      code: "<p id=\"intro\" class=\"note\" style=\"color: tomato; font-size: 24px;\">\n  This paragraph has three attributes.\n</p>\n\n<p style=\"background: lightgreen; padding: 10px;\">\n  This one has a style attribute too.\n</p>",
+      challenge: "Change the color to blue, then try a different font-size."
+    },
+    {
+      title: "Semantic tags give meaning",
+      text: "Tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;section&gt;</code>, and <code>&lt;footer&gt;</code> describe the purpose of each part of a page. They help search engines, screen readers, and other developers understand your work.",
+      code: "<header>\n  <h1>My Fan Site</h1>\n  <nav><a href=\"#\">Home</a> | <a href=\"#\">About</a></nav>\n</header>\n<main>\n  <section>\n    <h2>Latest news</h2>\n    <p>Something exciting happened today.</p>\n  </section>\n</main>\n<footer><p>Made by me</p></footer>",
+      challenge: "Add another <section> inside <main> with your own heading and paragraph."
+    },
+    {
+      title: "HTML teams up with CSS and JavaScript",
+      text: "HTML is the structure (the skeleton), CSS is the style (the clothes and colors), and JavaScript is the behavior (the muscles and movement). Learn HTML first and the other two will make much more sense.",
+      code: "<style>\n  button { background: royalblue; color: white; padding: 10px 16px; border: 0; border-radius: 8px; font-size: 16px; }\n  h2 { color: seagreen; }\n</style>\n\n<h2 id=\"msg\">Click the button!</h2>\n<button onclick=\"document.getElementById('msg').textContent = 'You did it!'\">Press me</button>",
+      challenge: "Change the colors in the <style> block, then change the message that appears after the click."
+    }
+  ];
+
+  var container = document.getElementById("lessons");
+
+  lessons.forEach(function (lesson, i) {
+    var n = i + 1;
+    var section = document.createElement("section");
+    section.className = "lesson";
+    section.setAttribute("aria-labelledby", "h" + n);
+
+    section.innerHTML =
+      '<div class="lesson-head"><div class="num" aria-hidden="true">' + n + '</div>' +
+      '<h2 id="h' + n + '">' + lesson.title + '</h2></div>' +
+      '<p>' + lesson.text + '</p>' +
+      '<div class="try">' +
+        '<div class="pane"><div class="pane-label"><label for="code' + n + '">Code (edit me)</label>' +
+        '<button class="reset" type="button">Reset</button></div>' +
+        '<textarea id="code' + n + '" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea></div>' +
+        '<div class="pane"><div class="pane-label"><span>Result</span></div>' +
+        '<iframe title="Live result for point ' + n + '" sandbox="allow-scripts"></iframe></div>' +
+      '</div>' +
+      '<div class="challenge"><strong>Challenge:</strong> ' + escapeHtml(lesson.challenge) + '</div>';
+
+    container.appendChild(section);
+
+    var textarea = section.querySelector("textarea");
+    var frame = section.querySelector("iframe");
+    var reset = section.querySelector("button.reset");
+
+    textarea.value = lesson.code;
+
+    function render() {
+      frame.srcdoc =
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:Arial,sans-serif;padding:10px;line-height:1.5;}</style></head><body>' +
+        textarea.value + '</body></html>';
+    }
+
+    textarea.addEventListener("input", render);
+    textarea.addEventListener("keydown", function (e) {
+      if (e.key === "Tab" && !e.shiftKey) {
+        e.preventDefault();
+        var start = textarea.selectionStart;
+        textarea.value = textarea.value.slice(0, start) + "  " + textarea.value.slice(textarea.selectionEnd);
+        textarea.selectionStart = textarea.selectionEnd = start + 2;
+        render();
+      }
+    });
+    reset.addEventListener("click", function () {
+      textarea.value = lesson.code;
+      render();
+    });
+
+    render();
+  });
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+</script>
+</body>
+</html>
