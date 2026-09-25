@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HTML Forms in 10 Points: Try It Yourself</title>
+  <style>
+    :root {
+      --paper: #f3f7fb;
+      --grid: #dde7f1;
+      --ink: #1b2a41;
+      --ink-soft: #4a5b73;
+      --blue: #2f6fed;
+      --marker: #ffe066;
+      --card: #ffffff;
+      --code-bg: #16202f;
+      --code-ink: #e8eef7;
+      --line: #c4d2e2;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    code, textarea, pre {
+      font-family: "Consolas", "Menlo", "Courier New", monospace;
+    }
+    a { color: var(--blue); }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+    header.hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 code {
+      background: var(--marker);
+      padding: 0 10px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      box-decoration-break: clone;
+    }
+    .hero p { max-width: 60ch; font-size: 1.1rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+    .howto {
+      max-width: 980px;
+      margin: 12px auto 8px;
+      padding: 0 20px;
+    }
+    .howto div {
+      background: var(--card);
+      border: 2px dashed var(--line);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .howto p { margin: 0; }
+
+    main { max-width: 980px; margin: 0 auto; padding: 8px 20px 60px; }
+
+    .lesson {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 22px 22px 24px;
+      margin: 28px 0;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .lesson-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+    .num {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--marker);
+      border: 2px solid var(--ink);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 1.2rem;
+    }
+    .lesson h2 { margin: 0; font-size: 1.45rem; line-height: 1.25; }
+    .lesson > p { margin: 8px 0 14px; max-width: 70ch; }
+    .lesson p code, .lesson li code {
+      background: #e9f0fa;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.92em;
+    }
+
+    .try { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pane { display: flex; flex-direction: column; min-width: 0; }
+    .pane-label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--ink-soft);
+    }
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      resize: vertical;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+    iframe {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+    }
+    button.reset {
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    button.reset:hover { background: var(--marker); }
+
+    .challenge {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: #fff8d6;
+      border-left: 6px solid var(--marker);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.97rem;
+    }
+
+    section.finish {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 36px;
+    }
+    section.finish h2 { margin-top: 0; }
+    section.finish code { background: #2b3d59; padding: 1px 6px; border-radius: 4px; }
+    section.finish ol { padding-left: 1.3em; }
+
+    footer { text-align: center; color: var(--ink-soft); padding: 0 20px 40px; font-size: 0.9rem; }
+
+    @media (max-width: 760px) {
+      .try { grid-template-columns: 1fr; }
+      .lesson { box-shadow: 4px 4px 0 var(--ink); padding: 18px 16px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+
+<header class="hero">
+  <h1>HTML forms in 10 points</h1>
+  <p>Forms are how a website listens: sign-ups, searches, donations, even AI prompts. Read each point, change the code in the dark box, and fill in the form on the right.</p>
+</header>
+
+<div class="howto">
+  <div>
+    <p><strong>How to use this page:</strong> nothing you type here can break anything, and no data leaves this page. When you submit a form, a green box shows what the browser <em>would</em> have sent. Press <em>Reset</em> to get the original code back.</p>
+  </div>
+</div>
+
+<main id="lessons"></main>
+
+<div style="max-width:980px;margin:0 auto;padding:0 20px 40px;">
+  <section class="finish">
+    <h2>Build a form for a real organization</h2>
+    <ol>
+      <li>Pick a nonprofit or community group you care about, such as a food shelf, library, or animal shelter.</li>
+      <li>In VS Code, create <code>volunteer.html</code> using the page skeleton from last week.</li>
+      <li>Build a volunteer sign-up form with labels, at least three input types, a radio group, a <code>&lt;select&gt;</code>, and a <code>&lt;textarea&gt;</code>.</li>
+      <li>Add validation: make the important fields <code>required</code> and use <code>min</code>, <code>max</code>, or <code>pattern</code> where they make sense.</li>
+      <li>Open it in your browser and try to break it by submitting empty or silly answers.</li>
+      <li>Use a structured prompt (role, task, context, format, constraints) to ask Claude to review your form for accessibility and missing labels.</li>
+    </ol>
+    <p>Next week we make these forms look great with CSS.</p>
+  </section>
+</div>
+
+<footer>Browser validation helps people fix mistakes. Real apps always check the data again on the server.</footer>
+
+<script>
+  var lessons = [
+    {
+        "title": "A form is how a web page listens",
+        "text": "Sign-ups, searches, donations, and surveys are all forms. The <code>&lt;form&gt;<\/code> tag wraps the inputs. Its <code>action<\/code> says where the data goes and its <code>method<\/code> says how it travels. On this page, a green box shows what would have been sent instead of sending it to a real server.",
+        "code": "<form action=\"/signup\" method=\"post\">\n  <p>What is your name?<\/p>\n  <input type=\"text\" name=\"name\">\n  <button>Send<\/button>\n<\/form>",
+        "challenge": "Type your name and press Send. Then add a second input with name=\"color\" that asks for a favorite color."
+    },
+    {
+        "title": "Every input needs a label",
+        "text": "A <code>&lt;label&gt;<\/code> tells people what to type. Connect it with <code>for<\/code> on the label and a matching <code>id<\/code> on the input. Clicking the label then puts the cursor in the box, and screen readers read the label out loud. You can also wrap the input inside the label.",
+        "code": "<label for=\"email\">Email<\/label>\n<input type=\"email\" id=\"email\" name=\"email\">\n\n<p>\n  <label>\n    <input type=\"checkbox\" name=\"news\"> Send me the newsletter\n  <\/label>\n<\/p>",
+        "challenge": "Click the word Email and watch the cursor jump into the box. Now delete for=\"email\" and click it again. What changed?"
+    },
+    {
+        "title": "The type attribute changes the input",
+        "text": "One tag, many jobs. <code>&lt;input&gt;<\/code> becomes a password box, a number spinner, a date picker, a color picker, or a slider just by changing <code>type<\/code>. On phones, the right type also shows the right keyboard, like a number pad for <code>tel<\/code>.",
+        "code": "<p><label>Text <input type=\"text\"><\/label><\/p>\n<p><label>Password <input type=\"password\"><\/label><\/p>\n<p><label>Number <input type=\"number\"><\/label><\/p>\n<p><label>Date <input type=\"date\"><\/label><\/p>\n<p><label>Color <input type=\"color\"><\/label><\/p>\n<p><label>Volume <input type=\"range\" min=\"0\" max=\"10\"><\/label><\/p>\n<p><label>Phone <input type=\"tel\"><\/label><\/p>",
+        "challenge": "Add type=\"time\" and type=\"url\". Then change the password box to type=\"text\" and see why the password type matters."
+    },
+    {
+        "title": "The name attribute is what gets sent",
+        "text": "When a form is submitted, the browser sends pairs like <code>name=value<\/code>. The <code>name<\/code> is the label the server sees; the <code>value<\/code> is what the person typed. An input with no <code>name<\/code> is silently left out.",
+        "code": "<form>\n  <p><label>First name <input name=\"first\"><\/label><\/p>\n  <p><label>Nickname <input><\/label><\/p>\n  <p><label>City <input name=\"city\"><\/label><\/p>\n  <button>Send<\/button>\n<\/form>",
+        "challenge": "Fill in all three boxes and press Send. Which one is missing from the green box? Fix it."
+    },
+    {
+        "title": "Radio buttons pick one, checkboxes pick many",
+        "text": "Radio buttons that share the same <code>name<\/code> form a group, so only one can be chosen. Checkboxes are independent. Give each one a <code>value<\/code> so the server knows which was picked, and add <code>checked<\/code> to choose a default.",
+        "code": "<form>\n  <p>T-shirt size:<\/p>\n  <label><input type=\"radio\" name=\"size\" value=\"S\"> Small<\/label>\n  <label><input type=\"radio\" name=\"size\" value=\"M\" checked> Medium<\/label>\n  <label><input type=\"radio\" name=\"size\" value=\"L\"> Large<\/label>\n\n  <p>I can help with:<\/p>\n  <label><input type=\"checkbox\" name=\"help\" value=\"setup\"> Setup<\/label>\n  <label><input type=\"checkbox\" name=\"help\" value=\"food\"> Serving food<\/label>\n  <label><input type=\"checkbox\" name=\"help\" value=\"cleanup\"> Cleanup<\/label>\n  <p><button>Sign up<\/button><\/p>\n<\/form>",
+        "challenge": "Change the name of one radio button to \"size2\". Now you can pick two sizes. Why is that a bug?"
+    },
+    {
+        "title": "Dropdowns and big text boxes",
+        "text": "Use <code>&lt;select&gt;<\/code> with <code>&lt;option&gt;<\/code> items when there is a fixed list of choices. Use <code>&lt;textarea&gt;<\/code> when people need to write more than one line. Unlike <code>&lt;input&gt;<\/code>, a textarea has a closing tag.",
+        "code": "<form>\n  <p><label for=\"grade\">Grade<\/label>\n  <select id=\"grade\" name=\"grade\">\n    <option value=\"\">Choose one<\/option>\n    <option value=\"6\">6th<\/option>\n    <option value=\"7\">7th<\/option>\n    <option value=\"8\">8th<\/option>\n  <\/select><\/p>\n\n  <p><label for=\"msg\">Message<\/label><br>\n  <textarea id=\"msg\" name=\"message\" rows=\"4\" cols=\"30\"><\/textarea><\/p>\n  <button>Send<\/button>\n<\/form>",
+        "challenge": "Add 9th through 12th grade as options. Then add the multiple attribute to the select and try holding Ctrl (or Cmd) while clicking."
+    },
+    {
+        "title": "Validation: the browser checks before sending",
+        "text": "Attributes like <code>required<\/code>, <code>minlength<\/code>, <code>maxlength<\/code>, <code>min<\/code>, <code>max<\/code>, and <code>pattern<\/code> make the browser stop a bad submission and show a message. This is only a first line of defense: anyone can switch it off, so real apps check the data again on the server. You will build that later in the course.",
+        "code": "<form>\n  <p><label>Username (4 to 12 letters)<br>\n    <input name=\"user\" required minlength=\"4\" maxlength=\"12\" pattern=\"[A-Za-z]+\">\n  <\/label><\/p>\n  <p><label>Age (13 to 19)<br>\n    <input type=\"number\" name=\"age\" required min=\"13\" max=\"19\">\n  <\/label><\/p>\n  <p><label>Email<br>\n    <input type=\"email\" name=\"email\" required>\n  <\/label><\/p>\n  <button>Join the club<\/button>\n<\/form>",
+        "challenge": "Press Join with empty boxes, then with username \"ab\", then with age 25. Finally add novalidate to the <form> tag and see every check disappear."
+    },
+    {
+        "title": "Friendly forms are easier to finish",
+        "text": "Group related inputs with <code>&lt;fieldset&gt;<\/code> and a <code>&lt;legend&gt;<\/code>. Use <code>placeholder<\/code> to show an example (never instead of a label), <code>value<\/code> to fill in a default, and <code>readonly<\/code> or <code>disabled<\/code> for things people should not change. A little CSS can show which boxes still need fixing.",
+        "code": "<style>\n  input:invalid { border: 2px solid crimson; }\n  input:valid   { border: 2px solid seagreen; }\n<\/style>\n<form>\n  <fieldset>\n    <legend>Contact info<\/legend>\n    <p><label>Phone <input type=\"tel\" name=\"phone\" placeholder=\"612-555-0100\" required><\/label><\/p>\n    <p><label>Country <input name=\"country\" value=\"USA\" readonly><\/label><\/p>\n  <\/fieldset>\n  <fieldset>\n    <legend>Event<\/legend>\n    <p><label>Event code <input name=\"code\" value=\"C4G-2026\" disabled><\/label><\/p>\n  <\/fieldset>\n  <button>Save<\/button>\n<\/form>",
+        "challenge": "Type a phone number and watch the border turn green. Submit the form: why does the event code not appear in the green box? (Hint: disabled vs readonly.)"
+    },
+    {
+        "title": "Buttons, GET, and POST",
+        "text": "A <code>&lt;button&gt;<\/code> inside a form submits it by default. Use <code>type=\"reset\"<\/code> to clear the form and <code>type=\"button\"<\/code> for a button that does nothing until JavaScript tells it to. <code>method=\"get\"<\/code> puts the data in the web address, which is great for searches. <code>method=\"post\"<\/code> sends it hidden in the request, which is right for passwords and personal details.",
+        "code": "<form action=\"/search\" method=\"get\">\n  <input type=\"search\" name=\"q\" placeholder=\"Search volunteers\">\n  <button>Search<\/button>\n<\/form>\n\n<form action=\"/login\" method=\"post\">\n  <p><input name=\"username\" placeholder=\"Username\"><\/p>\n  <p><input type=\"password\" name=\"password\" placeholder=\"Password\"><\/p>\n  <button type=\"submit\">Log in<\/button>\n  <button type=\"reset\">Clear<\/button>\n  <button type=\"button\">Do nothing<\/button>\n<\/form>",
+        "challenge": "Change the login form to method=\"get\". If the password ended up in the address bar, who else might see it? Change it back."
+    },
+    {
+        "title": "A form can build a structured AI prompt",
+        "text": "A structured prompt template is a fill-in-the-blanks recipe for asking an AI tool: <strong>role<\/strong>, <strong>task<\/strong>, <strong>context<\/strong>, <strong>format<\/strong>, and <strong>constraints<\/strong>. A form is a perfect fit. Each blank becomes an input, and <code>required<\/code> makes sure nobody skips the important parts. The small script at the bottom joins the answers into one prompt.",
+        "code": "<form id=\"pf\">\n  <p><label>Act as\n    <select name=\"persona\">\n      <option>a patient coding tutor<\/option>\n      <option>a senior web developer<\/option>\n      <option>a nonprofit marketing expert<\/option>\n    <\/select><\/label><\/p>\n  <p><label>Task<br><input name=\"task\" size=\"40\" required\n    placeholder=\"Explain the difference between GET and POST\"><\/label><\/p>\n  <p><label>Context<br><textarea name=\"details\" rows=\"2\" cols=\"40\"\n    placeholder=\"I am in 8th grade and just learned HTML forms\"><\/textarea><\/label><\/p>\n  <p><label>Format\n    <select name=\"format\">\n      <option>a short bulleted list<\/option>\n      <option>step-by-step instructions<\/option>\n      <option>a table<\/option>\n    <\/select><\/label><\/p>\n  <p><label>Constraints<br><input name=\"rules\" size=\"40\" value=\"Under 150 words\"><\/label><\/p>\n  <button>Build my prompt<\/button>\n<\/form>\n<pre id=\"out\" style=\"white-space: pre-wrap; background: #f4f4f4; padding: 10px;\"><\/pre>\n\n<script>\n  pf.onsubmit = function () {\n    var f = pf.elements;\n    out.textContent =\n      \"Act as \" + f.persona.value + \".\\n\" +\n      \"Task: \" + f.task.value + \"\\n\" +\n      \"Context: \" + (f.details.value || \"none\") + \"\\n\" +\n      \"Format: \" + f.format.value + \"\\n\" +\n      \"Constraints: \" + f.rules.value;\n    return false;\n  };\n<\/script>",
+        "challenge": "Add an Audience field (for example \"middle school students\") and include it in the prompt. Build a prompt, paste it into Claude, and compare the answer to what you get from a one-line question."
+    }
+];
+
+  var container = document.getElementById("lessons");
+
+  lessons.forEach(function (lesson, i) {
+    var n = i + 1;
+    var section = document.createElement("section");
+    section.className = "lesson";
+    section.setAttribute("aria-labelledby", "h" + n);
+
+    section.innerHTML =
+      '<div class="lesson-head"><div class="num" aria-hidden="true">' + n + '</div>' +
+      '<h2 id="h' + n + '">' + lesson.title + '</h2></div>' +
+      '<p>' + lesson.text + '</p>' +
+      '<div class="try">' +
+        '<div class="pane"><div class="pane-label"><label for="code' + n + '">Code (edit me)</label>' +
+        '<button class="reset" type="button">Reset</button></div>' +
+        '<textarea id="code' + n + '" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea></div>' +
+        '<div class="pane"><div class="pane-label"><span>Result</span></div>' +
+        '<iframe title="Live result for point ' + n + '" sandbox="allow-scripts allow-forms"></iframe></div>' +
+      '</div>' +
+      '<div class="challenge"><strong>Challenge:</strong> ' + escapeHtml(lesson.challenge) + '</div>';
+
+    container.appendChild(section);
+
+    var textarea = section.querySelector("textarea");
+    var frame = section.querySelector("iframe");
+    var reset = section.querySelector("button.reset");
+
+    textarea.value = lesson.code;
+
+    function render() {
+      frame.srcdoc =
+        '<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font-family:Arial,sans-serif;padding:10px;line-height:1.5;}</style><style>#sent{margin-top:14px;padding:10px;background:#eef9f0;border:2px solid #2e8b57;border-radius:8px;font-family:Consolas,monospace;font-size:13px;white-space:pre-wrap;word-break:break-all;}</style><script>document.addEventListener("submit",function(e){e.preventDefault();var f=e.target;if(f.onsubmit)return;var q=new URLSearchParams(new FormData(f)).toString();var b=document.getElementById("sent");if(!b){b=document.createElement("div");b.id="sent";document.body.appendChild(b);}b.textContent="Submitted! The browser would send this ("+(f.getAttribute("method")||"get").toUpperCase()+" to "+(f.getAttribute("action")||"this page")+"):\\n"+(q||"(nothing! Did you forget the name attributes?)");});<\/script></head><body>' +
+        textarea.value + '</body></html>';
+    }
+
+    textarea.addEventListener("input", render);
+    textarea.addEventListener("keydown", function (e) {
+      if (e.key === "Tab" && !e.shiftKey) {
+        e.preventDefault();
+        var start = textarea.selectionStart;
+        textarea.value = textarea.value.slice(0, start) + "  " + textarea.value.slice(textarea.selectionEnd);
+        textarea.selectionStart = textarea.selectionEnd = start + 2;
+        render();
+      }
+    });
+    reset.addEventListener("click", function () {
+      textarea.value = lesson.code;
+      render();
+    });
+
+    render();
+  });
+
+  function escapeHtml(s) {
+    return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+</script>
+</body>
+</html>
