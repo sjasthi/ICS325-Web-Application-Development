@@ -3,7 +3,7 @@
 The **Weekly Signoff Sheet** is used to document your individual progress throughout the ICS 499 Final Project.
 
 Template:
-
+https://github.com/sjasthi/ICS325-Web-Application-Development/blob/main/Final-Project/project-weekly-signoff-sheet.txt
 
 The weekly signoff is both:
 
