@@ -73,19 +73,7 @@ The Weekly Signoff by itself does **not** replace participation in the breakout-
 
 ## Q5. What should we submit for FP1?
 
-FP1 should primarily demonstrate that you understand the project.
-
-Your FP1 work should address questions such as:
-
-* What is the **scope** of the project?
-* What is the **goal** of the project?
-* What problem are you trying to solve?
-* Who are the intended users or stakeholders?
-* What does successful completion look like?
-* How will you know when the project is **done**?
-* What questions still need to be answered before the scope is clear?
-
-Your FP1 Weekly Signoff should also describe what you plan to accomplish during **FP2**.
+Please see the final project details.
 
 The goal of FP1 is not necessarily to start coding immediately. The goal is to make sure you understand **what you are building and why**.
 
@@ -93,108 +81,7 @@ The goal of FP1 is not necessarily to start coding immediately. The goal is to m
 
 ## Q6. What should we submit for FP2?
 
-FP2 should show that you are moving from understanding the project into **planning, exploration, research, and preliminary design**.
-
-Depending on the project, FP2 should address several of the following areas.
-
-### Project Plan
-
-Create a high-level plan describing how you expect to design, implement, test, and deliver the project through the remaining iterations.
-
-You may create a file such as:
-
-`FP_iteration_plan.md`
-
-and check it into the project repository.
-
-The iteration plan is **not cast in stone**.
-
-We will review it during breakout-room discussions and adjust it as we learn more about the project.
-
-### Play With the Existing System
-
-If you are enhancing an existing project:
-
-* deploy or run the existing application,
-* use it as a normal user,
-* use it as an administrator when applicable, and
-* understand the existing features and workflow.
-
-Before changing an existing system, you should understand how it currently works.
-
-### Review the Existing Repository
-
-If you are enhancing an existing project, review the current repository.
-
-You may also use an AI/LLM tool to help review the repository and identify:
-
-* technical debt,
-* code-quality problems,
-* bugs,
-* security concerns,
-* maintainability issues,
-* outdated dependencies,
-* documentation gaps, and
-* other opportunities for improvement.
-
-Ask the AI/LLM to provide a **prioritized list of recommended fixes or improvements**.
-
-You are still responsible for reviewing and validating the recommendations.
-
-### Research
-
-If you are building a brand-new project, research what already exists in the market or industry.
-
-Look at similar:
-
-* applications,
-* products,
-* open-source projects,
-* user interfaces,
-* architectures, and
-* features.
-
-Use this research to generate ideas and make informed design decisions for your project.
-
-### Preliminary Design
-
-Identify the preliminary technology stack you expect to use.
-
-Examples may include:
-
-* programming language,
-* frontend framework,
-* backend framework,
-* database,
-* cloud platform,
-* APIs,
-* AI/LLM services,
-* authentication approach,
-* deployment platform, and
-* development tools.
-
-Your technology choices may change later. FP2 should show your **current thinking and rationale**.
-
-### Risks
-
-Identify the major risks to your project.
-
-Examples include:
-
-* unfamiliar technology,
-* external API dependencies,
-* difficult deployment requirements,
-* lack of access to required data,
-* security or privacy concerns,
-* limited project time,
-* unclear requirements, or
-* dependencies on other team members.
-
-For each significant risk, explain what you are doing to:
-
-* eliminate it,
-* reduce it, or
-* manage it.
+Please see the final project details.
 
 ---
 
@@ -202,7 +89,7 @@ For each significant risk, explain what you are doing to:
 
 Use the template provided here:
 
-https://github.com/sjasthi/ics499/blob/main/Assets/weekly_signoff.txt
+https://github.com/sjasthi/ICS325-Web-Application-Development/blob/main/Final-Project/project-weekly-signoff-sheet.txt
 
 The file may remain a **plain-text `.txt` file**.
 
