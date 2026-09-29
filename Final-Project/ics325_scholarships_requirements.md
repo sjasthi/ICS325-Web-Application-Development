@@ -250,7 +250,7 @@ To keep this safe and to make the later lock-down easy, every team follows these
 ### Every Iteration, Every Team Submits
 
 1. **GitHub**: all work merged to `main` through pull requests, with an iteration tag (`iter-01`, `iter-02`, …).
-2. **Iteration report** (`docs/iterations/iteration-NN.md`): what was planned, what was completed (by requirement ID), what slipped and why, known bugs, and the plan for the next iteration.
+2. **Iteration report** (`https://github.com/sjasthi/ICS325-Web-Application-Development/blob/main/Final-Project/project-weekly-signoff-sheet.txt`): what was planned, what was completed (by requirement ID), what slipped and why, known bugs, and the plan for the next iteration.
 3. **Demo**: a short recorded or live demo (3–5 minutes) of the new functionality.
 4. **Updated SQL scripts** if the schema changed.
 
