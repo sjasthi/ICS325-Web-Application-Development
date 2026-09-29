@@ -2,6 +2,8 @@
 # Pathways to Scholarships — `scholarships` Web Application
 
 ### Requirements Specification and 10-Iteration Plan
+### TODO 1:  Jasthi to provide users and registrations table schema  TODO 2: static review of the website to produce security report (We will apply https://anveshi.ai/trailhead to our websites around FP 7 or FP8)
+
 
 ---
 
