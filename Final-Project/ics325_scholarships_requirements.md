@@ -297,6 +297,7 @@ To keep this safe and to make the later lock-down easy, every team follows these
 
 - Downloadable import template matching the Data Science "Recommended Data Fields."
 - File upload (`.xlsx` and `.csv`, one or many files) with type and size checks.
+- Ensure that each student has 20 scholarships (from the state and national level categories assigned to them) and that CSV can be uploaded to the database.
 - Staging table; cleaning and validation rules from FR-IMP-04 and FR-IMP-05 (trimming, non-breaking spaces, state codes, Yes/No/Unknown, money and date parsing, grade ranges, national vs. state/local).
 - Duplicate detection by normalized official URL — within a file, across files, and against records already loaded.
 - Validation report page with per-row status (*Ready*, *Warning*, *Duplicate*, *Error*) and reasons.
@@ -349,6 +350,7 @@ To keep this safe and to make the later lock-down easy, every team follows these
 **Goal:** The merged dataset can be trusted, measured, and shared back with the Data Science class.
 
 - Data quality dashboard: expired deadlines, stale verification dates, records missing key fields, possible duplicates.
+- Ensure that each student has 20 more scholarships (from the state and national level categories assigned to them) and the combined CSV can be uploaded to the database.
 - Coverage report by state and by national theme, highlighting gaps.
 - CSV export of the full or filtered dataset using the template column names.
 - Public "Scholarship Facts" page and admin dashboard with Chart.js charts and summary cards.
