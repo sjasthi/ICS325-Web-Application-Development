@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>JavaScript Basics in 10 Points — Week 5</title><style>
+    :root {
+      --paper: #f3f7fb;
+      --grid: #dde7f1;
+      --ink: #1b2a41;
+      --ink-soft: #4a5b73;
+      --blue: #2f6fed;
+      --marker: #ffe066;
+      --card: #ffffff;
+      --code-bg: #16202f;
+      --code-ink: #e8eef7;
+      --line: #c4d2e2;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+      color: var(--ink);
+      line-height: 1.6;
+      background-color: var(--paper);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    code, textarea, pre {
+      font-family: "Consolas", "Menlo", "Courier New", monospace;
+    }
+    a { color: var(--blue); }
+    :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+
+    header.hero {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 56px 20px 24px;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      line-height: 1.1;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
+    }
+    .hero h1 code {
+      background: var(--marker);
+      padding: 0 10px;
+      border-radius: 6px;
+      font-size: 0.9em;
+      box-decoration-break: clone;
+    }
+    .hero p { max-width: 60ch; font-size: 1.1rem; color: var(--ink-soft); margin: 0 0 12px; }
+
+    .howto {
+      max-width: 980px;
+      margin: 12px auto 8px;
+      padding: 0 20px;
+    }
+    .howto div {
+      background: var(--card);
+      border: 2px dashed var(--line);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .howto p { margin: 0; }
+
+    main { max-width: 980px; margin: 0 auto; padding: 8px 20px 60px; }
+
+    .lesson {
+      background: var(--card);
+      border: 2px solid var(--ink);
+      border-radius: 14px;
+      padding: 22px 22px 24px;
+      margin: 28px 0;
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+    .lesson-head { display: flex; align-items: center; gap: 14px; margin-bottom: 6px; }
+    .num {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: var(--marker);
+      border: 2px solid var(--ink);
+      display: grid; place-items: center;
+      font-weight: 800; font-size: 1.2rem;
+    }
+    .lesson h2 { margin: 0; font-size: 1.45rem; line-height: 1.25; }
+    .lesson > p { margin: 8px 0 14px; max-width: 70ch; }
+    .lesson p code, .lesson li code {
+      background: #e9f0fa;
+      padding: 1px 6px;
+      border-radius: 4px;
+      font-size: 0.92em;
+    }
+
+    .try { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pane { display: flex; flex-direction: column; min-width: 0; }
+    .pane-label {
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 6px; color: var(--ink-soft);
+    }
+    textarea {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      resize: vertical;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      tab-size: 2;
+    }
+    iframe {
+      width: 100%;
+      min-height: 190px;
+      flex: 1;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      background: #fff;
+    }
+    button.reset {
+      font: inherit;
+      font-size: 0.8rem;
+      font-weight: 700;
+      background: var(--card);
+      color: var(--ink);
+      border: 2px solid var(--ink);
+      border-radius: 6px;
+      padding: 2px 10px;
+      cursor: pointer;
+    }
+    button.reset:hover { background: var(--marker); }
+
+    .challenge {
+      margin-top: 14px;
+      padding: 10px 14px;
+      background: #fff8d6;
+      border-left: 6px solid var(--marker);
+      border-radius: 0 8px 8px 0;
+      font-size: 0.97rem;
+    }
+
+    section.finish {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 14px;
+      padding: 24px;
+      margin-top: 36px;
+    }
+    section.finish h2 { margin-top: 0; }
+    section.finish code { background: #2b3d59; padding: 1px 6px; border-radius: 4px; }
+    section.finish ol { padding-left: 1.3em; }
+
+    footer { text-align: center; color: var(--ink-soft); padding: 0 20px 40px; font-size: 0.9rem; }
+
+    @media (max-width: 760px) {
+      .try { grid-template-columns: 1fr; }
+      .lesson { box-shadow: 4px 4px 0 var(--ink); padding: 18px 16px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  pre.output{margin:0;min-height:240px;flex:1;white-space:pre-wrap;overflow-wrap:anywhere;background:#f2f6fb;border:2px solid var(--ink);border-radius:8px;padding:14px;color:var(--ink);font-size:.95rem}textarea{min-height:240px}.actions{display:flex;gap:6px}button.run{font:inherit;font-weight:700;font-size:.8rem;background:var(--marker);border:2px solid var(--ink);border-radius:6px;padding:2px 10px;cursor:pointer}.python{font-size:.9rem;color:var(--ink-soft)}.jump{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}.jump a{background:white;border:1px solid var(--line);border-radius:6px;padding:3px 10px}pre.setup{white-space:pre-wrap;overflow-wrap:anywhere;background:#2b3d59;padding:14px;border-radius:8px}@media print{body{background:white}.lesson{box-shadow:none;break-inside:avoid}.actions,.jump{display:none}textarea{color:black;background:white}}</style></head><body><header class="hero"><p>ICS 325 · Web Application Development · Week 5</p><h1>JavaScript Basics<br>in <code>10 points</code></h1><p>You already know Python. Learn the JavaScript syntax you need next: read each point, predict the output, then change the code and compare the result.</p><nav class="jump" aria-label="Jump to a point"><a href="#point1">1</a><a href="#point2">2</a><a href="#point3">3</a><a href="#point4">4</a><a href="#point5">5</a><a href="#point6">6</a><a href="#point7">7</a><a href="#point8">8</a><a href="#point9">9</a><a href="#point10">10</a></nav></header><div class="howto"><div><p><strong>How to use this page:</strong> output updates shortly after an edit. Press <em>Run</em> to run immediately or <em>Reset</em> to restore the original. Each example starts fresh. Long-running loops stop after one second; output is limited to 100 lines.</p><p class="python">This Week 5 runner supports language basics and console output. Page elements, events, and forms come in Weeks 6–7.</p></div></div><main id="lessons"></main><div style="max-width:980px;margin:0 auto;padding:0 20px 40px;"><section class="finish"><h2>Use JavaScript in your own project</h2><ol><li>Create <code>app.js</code> next to your HTML file.</li><li>Add the following tag in your HTML head:</li></ol><pre class="setup">&lt;script src="app.js" defer&gt;&lt;/script&gt;</pre><ol start="3"><li>Copy a Basics example into app.js, save, and reload your HTML page.</li><li>Open the browser developer tools and select <em>Console</em> to see console.log output.</li><li>Build a donation summary using an array of amounts, a totalDonations function, and an if / else message. Check an empty array and several donations.</li></ol><p>Next: Week 6 uses the DOM to put these results on a web page; Week 7 adds events and form validation.</p></section></div><footer>Predict → Run → Modify → Explain · JavaScript language basics for Python learners</footer><script>const lessons=[{"title": "JavaScript runs the logic in your browser", "text": "HTML structures a page; CSS styles it; JavaScript computes and controls behavior. PHP runs on the server, and MySQL stores data. Use \u003ccode>console.log()\u003c/code> like Python\u2019s \u003ccode>print()\u003c/code>. These examples show captured console output, rather than changing HTML.", "code": "console.log(\"Hello, JavaScript!\");\nconsole.log(\"Books donated:\", 12 + 8);", "challenge": "Change the message, then print the total of three donation amounts."}, {"title": "Braces define blocks; comments explain code", "text": "Python uses indentation to define blocks. JavaScript uses \u003ccode>{ }\u003c/code>; keep indentation for readability. Use \u003ccode>//\u003c/code> for a line comment and \u003ccode>/* ... */\u003c/code> for a block comment. Statements here end with semicolons.", "code": "// A line comment (Python uses #)\n/* A block comment */\nif (true) {\n  console.log(\"Inside the block\");\n}\nconsole.log(\"After the block\");", "challenge": "Change true to false. Predict which message disappears. Remove a closing brace to see a syntax error, then Reset."}, {"title": "Use const for bindings and let for changing values", "text": "Use \u003ccode>const\u003c/code> by default; use \u003ccode>let\u003c/code> when you need reassignment. Unlike a regular Python assignment, a const binding cannot be reassigned. Avoid older \u003ccode>var\u003c/code> for these exercises.", "code": "const organization = \"Code4Good\";\nlet books = 10;\nbooks += 5;\nconsole.log(organization);\nconsole.log(\"Books:\", books);", "challenge": "Add 7 more books. Then try organization = \"New name\" and explain the error."}, {"title": "Know your basic value types", "text": "Strings hold text, numbers include integers and decimals, and booleans are \u003ccode>true\u003c/code> or \u003ccode>false\u003c/code>. Python uses \u003ccode>True\u003c/code>, \u003ccode>False\u003c/code>, and \u003ccode>None\u003c/code>. JavaScript \u003ccode>null\u003c/code> means intentional absence; \u003ccode>undefined\u003c/code> often means an unassigned value. Use \u003ccode>typeof\u003c/code> to inspect types; historically typeof null is \"object\".", "code": "const name = \"Ana\";\nconst donation = 12.5;\nconst enrolled = true;\nlet missing;\nconst optionalNote = null;\nconsole.log(typeof name);\nconsole.log(typeof donation);\nconsole.log(typeof enrolled);\nconsole.log(missing, optionalNote);", "challenge": "Predict the output. Add a variable holding \"12.5\" and compare its type with donation."}, {"title": "Calculate, build strings, and convert explicitly", "text": "Arithmetic includes \u003ccode>+ - * / % **\u003c/code>. With a string operand, \u003ccode>+\u003c/code> concatenates instead of adding. Use \u003ccode>Number()\u003c/code> when you intend numeric conversion, and template literals with backticks and \u003ccode>${expression}\u003c/code> for readable messages\u2014similar to Python f-strings.", "code": "const price = 8;\nconst quantity = 3;\nconsole.log(`Total: $${price * quantity}`);\nconsole.log(\"5\" + 2);\nconsole.log(Number(\"5\") + 2);\nconsole.log(17 % 5);\nconsole.log(2 ** 3);", "challenge": "Predict every output. Change quantity to 5. Try Number(\"hello\") and explain NaN."}, {"title": "Compare values and choose with if / else", "text": "Prefer \u003ccode>===\u003c/code> and \u003ccode>!==\u003c/code> to avoid the type conversion performed by \u003ccode>==\u003c/code>. Use \u003ccode>&amp;&amp;\u003c/code>, \u003ccode>||\u003c/code>, and \u003ccode>!\u003c/code> where Python uses and, or, and not. JavaScript uses \u003ccode>else if\u003c/code> instead of elif. Write both comparisons in a range check.", "code": "const score = 82;\nconsole.log(5 === \"5\");\nif (score >= 90 && score \u003c= 100) {\n  console.log(\"Excellent\");\n} else if (score >= 70 && score \u003c 90) {\n  console.log(\"Pass\");\n} else {\n  console.log(\"Review score\");\n}", "challenge": "Test scores 95, 70, and 65. Why is score >= 70 && score \u003c= 100 better than 70 \u003c= score \u003c= 100?"}, {"title": "Arrays store ordered values", "text": "JavaScript arrays resemble Python lists: indexing starts at zero. Use \u003ccode>.length\u003c/code> instead of len(), \u003ccode>.push()\u003c/code> instead of append(), and \u003ccode>.pop()\u003c/code> to remove the last item. A const array can change its contents; its binding cannot be reassigned.", "code": "const topics = [\"HTML\", \"CSS\"];\ntopics.push(\"JavaScript\");\nconsole.log(topics[0]);\nconsole.log(topics.length);\nconsole.log(topics[topics.length - 1]);\nconsole.log(topics);", "challenge": "Add \"PHP\", then remove it with pop(). Print the length before and after removal."}, {"title": "Objects store named properties", "text": "An object groups named properties, similar to many uses of a Python dictionary. Access known names with dot notation or use brackets for a key held in a variable. Properties may hold strings, numbers, booleans, arrays, or other objects.", "code": "const student = {\n  name: \"Ben\",\n  points: 80,\n  enrolled: true\n};\nstudent.points += 5;\nconst key = \"name\";\nconsole.log(student.name);\nconsole.log(student[key]);\nconsole.log(student.points);", "challenge": "Add a course property with value \"JavaScript\" and print it. Compare student.key with student[key]."}, {"title": "Loops repeat work", "text": "Use \u003ccode>for...of\u003c/code> for array values, like Python\u2019s for item in items. A counter loop has initialization, a condition, and an update; JavaScript has no built-in range() counterpart. A while loop must make progress toward a false condition.", "code": "const donations = [10, 20, 30];\nlet total = 0;\nfor (const amount of donations) {\n  total += amount;\n}\nconsole.log(\"Total:\", total);\nfor (let i = 0; i \u003c 3; i++) {\n  console.log(\"Index:\", i);\n}\nlet remaining = 2;\nwhile (remaining > 0) {\n  console.log(\"Remaining:\", remaining);\n  remaining--;\n}", "challenge": "Add a fourth donation. Write a counter loop that prints 2, 4, 6, 8, and 10."}, {"title": "Functions turn logic into reusable tools", "text": "Use \u003ccode>function\u003c/code> where Python uses def. Parameters receive inputs; \u003ccode>return\u003c/code> sends a result back. Logging is separate from returning. Without an explicit return, a function returns undefined. let and const have block scope; variables declared inside a function are local. Arrow functions offer a compact alternative.", "code": "function totalDonations(amounts) {\n  let total = 0;\n  for (const amount of amounts) {\n    total += amount;\n  }\n  return total;\n}\nconst double = (value) => value * 2;\nconsole.log(totalDonations([10, 20, 30]));\nconsole.log(double(7));", "challenge": "Create classifyDonation(amount): return \"Large\" for 50 or more and \"Small\" otherwise. Call it for 20 and 75."}];
+const container=document.getElementById('lessons');
+lessons.forEach((lesson,i)=>{
+ const n=i+1,section=document.createElement('section');section.className='lesson';section.id='point'+n;section.setAttribute('aria-labelledby','h'+n);
+ section.innerHTML='<div class="lesson-head"><div class="num" aria-hidden="true">'+n+'</div><h2 id="h'+n+'">'+lesson.title+'</h2></div><p>'+lesson.text+'</p><div class="try"><div class="pane"><div class="pane-label"><label for="code'+n+'">JavaScript (edit me)</label><div class="actions"><button class="run" type="button">Run</button><button class="reset" type="button">Reset</button></div></div><textarea id="code'+n+'" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea></div><div class="pane"><div class="pane-label"><span id="outlabel'+n+'">Console output</span></div><pre class="output" aria-labelledby="outlabel'+n+'" aria-live="polite"></pre></div></div><div class="challenge"><strong>Challenge:</strong> <span></span></div>';
+ container.append(section);section.querySelector('.challenge span').textContent=lesson.challenge;
+ const editor=section.querySelector('textarea'),output=section.querySelector('.output');editor.value=lesson.code;
+ let worker=null,url=null,timer=null,debounce=null;
+ function stop(){if(worker)worker.terminate();if(url)URL.revokeObjectURL(url);clearTimeout(timer);worker=null;url=null;}
+ function run(){stop();output.textContent='';const source=`const format=x=>typeof x==='object'?JSON.stringify(x):String(x);const console={log:(...args)=>postMessage({text:args.map(format).join(' ')}),error:(...args)=>postMessage({text:args.map(format).join(' ')})};try{(new Function('console',${JSON.stringify(editor.value)}))(console);}catch(e){postMessage({text:e.name+': '+e.message});}postMessage({done:true});`;
+ try{url=URL.createObjectURL(new Blob([source],{type:'text/javascript'}));worker=new Worker(url);let lines=0;worker.onmessage=e=>{if(e.data.done){if(!output.textContent)output.textContent='(No output. Try console.log().)';stop();}else if(lines++<100){output.textContent+=e.data.text+'\n';}else{output.textContent+='Output limit reached.\n';stop();}};worker.onerror=e=>{output.textContent+='Error: '+e.message;stop();};timer=setTimeout(()=>{output.textContent+='Stopped after 1 second. Check your loop condition.';stop();},1000);}catch(e){output.textContent='Cannot start the runner in this browser: '+e.message;stop();}}
+ editor.addEventListener('input',()=>{clearTimeout(debounce);debounce=setTimeout(run,400);});section.querySelector('.run').onclick=()=>{clearTimeout(debounce);run();};section.querySelector('.reset').onclick=()=>{clearTimeout(debounce);editor.value=lesson.code;run();};run();
+});
+</script></body></html>
